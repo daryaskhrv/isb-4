@@ -12,14 +12,15 @@ def check_card_number(hash: str, card_number: str) -> Union[str, bool]:
         card_number (str): номер карты
     Returns
     --------
-        card_number (str) если хеш совпал, иначе False"""
+        card_number (str) если хеш совпал, иначе False
+    """
     true_hash = hashlib.sha256(card_number.encode()).hexdigest()
     if hash == true_hash:
         return card_number
     return False
 
 
-def enumerate_card_number(hash: str, bins: list, last_numbers: str, pools: int = mp.cpu_count()) -> Optional[str]:
+def enumerate_card_number(hash: str, bins: str, last_numbers: str, pools: int = mp.cpu_count()) -> Optional[str]:
     """
     Функция подбирает номер карты.
     Parameters
@@ -34,8 +35,7 @@ def enumerate_card_number(hash: str, bins: list, last_numbers: str, pools: int =
     """
     args = []
     for i in range(1000000):
-        for bin in bins:
-            args.append((hash, f"{bin}{i:06d}{last_numbers}"))
+        args.append((hash, f"{bins}{i:06d}{last_numbers}"))
     with mp.Pool(processes=pools) as p:
         for result in p.starmap(check_card_number, tqdm(args, desc="Процесс нахождения номера карты: ",ncols=120)):
             if result:
@@ -44,4 +44,4 @@ def enumerate_card_number(hash: str, bins: list, last_numbers: str, pools: int =
     return None
 
 if __name__ == '__main__':
-    print(enumerate_card_number("70ba6e37c3be80134c2fd8563043c0cb9278a43116b3bc2dfad03e2e455ed473",[446674],"1378",3))
+    print(enumerate_card_number("70ba6e37c3be80134c2fd8563043c0cb9278a43116b3bc2dfad03e2e455ed473","446674","1378",3))
