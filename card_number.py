@@ -2,7 +2,7 @@ import hashlib
 import multiprocessing as mp
 from tqdm import tqdm
 from typing import Union, Optional
-from work_with_files import read_data, write_data
+from work_with_files import write_data
 
 def check_card_number(hash: str, card_number: str) -> Union[str, bool]:
     """
@@ -34,9 +34,9 @@ def enumerate_card_number(settings: dict,pools: int = mp.cpu_count()) -> Optiona
     --------
         result (str): номер карты, если найден
     """
-    hash=read_data(settings['hash'])
-    bin=read_data(settings['bin'])
-    last_numbers=read_data(settings['last_numbers'])
+    hash=settings['hash']
+    bin=settings['bin']
+    last_numbers=settings['last_numbers']
     args = []
     for i in range(1000000):
         args.append((hash, f"{bin}{i:06d}{last_numbers}"))

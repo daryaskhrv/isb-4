@@ -2,9 +2,9 @@ import logging
 import json
 
 SETTINGS = {
-    'hash': 'files/hash.txt',
-    'bin': 'files/bin.txt',
-    'last_numbers': 'files/last_numbers.txt',
+    'hash': '70ba6e37c3be80134c2fd8563043c0cb9278a43116b3bc2dfad03e2e455ed473',
+    'bin': '446674',
+    'last_numbers': '1378',
     'card_number': 'files/card_number.txt',
     'statistics': 'files/statistics.csv',
     'png_statistics': 'files/statistics.png'
