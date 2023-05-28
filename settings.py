@@ -46,5 +46,5 @@ def record_settings(settings_file: str, settings: dict) -> None:
         logging.warning(f'{err} ошибка при записи в файл {settings_file}')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     record_settings('settings.json',SETTINGS)
