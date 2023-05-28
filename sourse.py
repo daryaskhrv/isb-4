@@ -1,11 +1,7 @@
-import logging
 import hashlib
 import multiprocessing as mp
 from tqdm import tqdm
 from typing import Union, Optional
-
-logger = logging.getLogger()
-logger.setLevel('INFO')
 
 def check_card_number(hash: str, card_number: str) -> Union[str, bool]:
     """
