@@ -2,6 +2,16 @@ import hashlib
 import multiprocessing as mp
 from tqdm import tqdm
 from typing import Union, Optional
+from work_with_files import read_data, write_data
+
+SETTINGS = {
+    'hash': 'files/hash.txt',
+    'bin': 'files/bin.txt',
+    'last_numbers': 'files/last_numbers.txt',
+    'card_number': 'files/card_number.txt',
+    'statistics': 'files/statistics.csv',
+    'png_statistics': 'files/statistics.png'
+}
 
 def check_card_number(hash: str, card_number: str) -> Union[str, bool]:
     """
@@ -20,7 +30,8 @@ def check_card_number(hash: str, card_number: str) -> Union[str, bool]:
     return False
 
 
-def enumerate_card_number(hash: str, bins: str, last_numbers: str, pools: int = mp.cpu_count()) -> Optional[str]:
+def enumerate_card_number(settings: dict,pools: int = mp.cpu_count()) -> Optional[str]:
+        #hash: str, bins: str, last_numbers: str, pools: int = mp.cpu_count()) -> Optional[str]:
     """
     Функция подбирает номер карты.
     Parameters
@@ -33,15 +44,19 @@ def enumerate_card_number(hash: str, bins: str, last_numbers: str, pools: int = 
     --------
         result (str): номер карты, если найден
     """
+    hash=read_data(settings['hash'])
+    bin=read_data(settings['bin'])
+    last_numbers=read_data(settings['last_numbers'])
     args = []
     for i in range(1000000):
-        args.append((hash, f"{bins}{i:06d}{last_numbers}"))
+        args.append((hash, f"{bin}{i:06d}{last_numbers}"))
     with mp.Pool(processes=pools) as p:
         for result in p.starmap(check_card_number, tqdm(args, desc="Процесс нахождения номера карты: ",ncols=120)):
             if result:
                 p.terminate()
+                write_data(result,settings['card_number'])
                 return result
     return None
 
 if __name__ == '__main__':
-    print(enumerate_card_number("70ba6e37c3be80134c2fd8563043c0cb9278a43116b3bc2dfad03e2e455ed473","446674","1378",3))
+    print(enumerate_card_number(SETTINGS))
