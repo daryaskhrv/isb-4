@@ -22,7 +22,6 @@ def check_card_number(hash: str, card_number: str) -> Union[str, bool]:
 
 
 def enumerate_card_number(settings: dict,pools: int = mp.cpu_count()) -> Optional[str]:
-        #hash: str, bins: str, last_numbers: str, pools: int = mp.cpu_count()) -> Optional[str]:
     """
     Функция подбирает номер карты.
     Parameters

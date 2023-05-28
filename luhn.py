@@ -17,6 +17,3 @@ def algorithm_luhn(card_number_path: str) -> bool:
         if card_numbers[i] > 9:
             card_numbers[i] = card_numbers[i] % 10 + card_numbers[i] // 10
     return sum(card_numbers) % 10 == 0
-
-if __name__ == '__main__':
-    print(algorithm_luhn('files/card_number.txt'))
