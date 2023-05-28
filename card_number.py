@@ -26,9 +26,7 @@ def enumerate_card_number(settings: dict,pools: int = mp.cpu_count()) -> Optiona
     Функция подбирает номер карты.
     Parameters
     ----------
-        hash (str): хеш
-        bin (list): список бинов
-        last_numbers (str): последние 4 цифры карты
+        settings (dict): параметры
         pools (int): кол-во ядер
     Returns
     --------
