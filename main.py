@@ -36,3 +36,6 @@ if __name__ == "__main__":
                 logging.info("Номер карты действителен")
             else:
                 logging.info("Номер карты не действителен")
+        elif args.statistics:
+            statistic_and_graph(settings)
+            logging.info('Гистограмма построена')

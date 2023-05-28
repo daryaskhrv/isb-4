@@ -41,7 +41,7 @@ def enumerate_card_number(settings: dict,pools: int = mp.cpu_count()) -> Optiona
     for i in range(1000000):
         args.append((hash, f"{bin}{i:06d}{last_numbers}"))
     with mp.Pool(processes=pools) as p:
-        for result in p.starmap(check_card_number, tqdm(args, desc="Процесс нахождения номера карты: ",ncols=120)):
+        for result in p.starmap(check_card_number, tqdm(args, desc="Процесс нахождения номера карты: ",ncols=110)):
             if result:
                 p.terminate()
                 write_data(result,settings['card_number'])
