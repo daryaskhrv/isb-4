@@ -4,15 +4,6 @@ from tqdm import tqdm
 from typing import Union, Optional
 from work_with_files import read_data, write_data
 
-SETTINGS = {
-    'hash': 'files/hash.txt',
-    'bin': 'files/bin.txt',
-    'last_numbers': 'files/last_numbers.txt',
-    'card_number': 'files/card_number.txt',
-    'statistics': 'files/statistics.csv',
-    'png_statistics': 'files/statistics.png'
-}
-
 def check_card_number(hash: str, card_number: str) -> Union[str, bool]:
     """
     Функция проверяет, соответствует ли номер карты хешу.
@@ -57,6 +48,3 @@ def enumerate_card_number(settings: dict,pools: int = mp.cpu_count()) -> Optiona
                 write_data(result,settings['card_number'])
                 return result
     return None
-
-if __name__ == '__main__':
-    print(enumerate_card_number(SETTINGS))

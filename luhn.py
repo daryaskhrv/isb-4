@@ -1,4 +1,6 @@
-def algorithm_luhn(card_number: str) -> bool:
+from work_with_files import read_data
+
+def algorithm_luhn(card_number_path: str) -> bool:
     """
     Функция проверки корректности номера карты.
     Parameters
@@ -8,6 +10,7 @@ def algorithm_luhn(card_number: str) -> bool:
     --------
         True, если номер корректный, иначе False
     """
+    card_number=read_data(card_number_path)
     card_numbers = list(map(int, card_number))[::-1]
     for i in range(1, len(card_numbers), 2):
         card_numbers[i] *= 2
@@ -16,4 +19,4 @@ def algorithm_luhn(card_number: str) -> bool:
     return sum(card_numbers) % 10 == 0
 
 if __name__ == '__main__':
-    print(algorithm_luhn("4466747458361378"))
+    print(algorithm_luhn('files/card_number.txt'))
